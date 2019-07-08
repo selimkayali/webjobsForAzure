@@ -25,8 +25,6 @@ export class Tab1Page {
       if (this.uri.trim() !== '') {
         localStorage.setItem('uri', this.uri);
         this.uri = localStorage.getItem('uri');
-      } else {
-        alert('madafa');
       }
     }
     if (this.uri.trim() !== '') {
@@ -34,8 +32,23 @@ export class Tab1Page {
       this.interval = setInterval(async () => {
         this.jsonResponse = '';
         this.jsonResponse = await this.name(this.uri).then(data => data.text());
+        let date = new Date();
+        this.jsonResponse +=
+          ' ' +
+          date.getDay() +
+          '.' +
+          date.getMonth() +
+          '.' +
+          date.getFullYear() +
+          '-' +
+          date.getHours() +
+          ':' +
+          date.getMinutes() +
+          ':' +
+          date.getSeconds();
+
         this.number += 1;
-      }, 6000);
+      }, 90000);
     }
   }
 

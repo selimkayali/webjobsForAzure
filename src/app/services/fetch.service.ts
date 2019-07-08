@@ -9,7 +9,7 @@ export class FetchService {
 
   async get(): Promise<string> {
     return await this.httpClient
-      .get<Promise<string>>('https://mongox.azurewebsites.net/api/mongo')
+      .get<Promise<string>>('uri if you want to use HttpClient')
       .toPromise();
   }
 }
