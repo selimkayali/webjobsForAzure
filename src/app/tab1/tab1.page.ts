@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { FetchService } from '../services/fetch.service';
+import { BackgroundMode } from '@ionic-native/background-mode/ngx';
+import { ForegroundService } from '@ionic-native/foreground-service/ngx';
 
 @Component({
   selector: 'app-tab1',
@@ -12,9 +14,32 @@ export class Tab1Page {
   interval;
   uri: string = '';
   jsonResponse: string = '';
-  constructor(private alertController: AlertController, private fetchService: FetchService) {}
+  constructor(
+    private alertController: AlertController,
+    private fetchService: FetchService,
+    private backgroundMode: BackgroundMode,
+    private foregroundService: ForegroundService
+  ) {}
 
   async startFetch() {
+    this.backgroundMode.disableWebViewOptimizations();
+    this.backgroundMode.enable();
+    // this.backgroundMode.setDefaults({
+    //   silent: true,
+    //   hidden: false,
+    //   bigText: true,
+    //   resume: true,
+    //   ticker: 'its working :)',
+    //   text: 'Azure webjobs',
+    //   title: 'webjobs'
+    // });
+
+    // this.badge.requestPermission().then(res => {
+    //   if (res) {
+
+    //   }
+    // });
+
     // this.jsonResponse = JSON.stringify(await this.fetchService.get());
     // console.log(this.jsonResponse);
     // this.presentAlert();
@@ -46,8 +71,8 @@ export class Tab1Page {
           date.getMinutes() +
           ':' +
           date.getSeconds();
-
         this.number += 1;
+        this.foregroundService.start('WebJobs Working - ' + this.number, this.jsonResponse);
       }, 90000);
     }
   }
@@ -63,9 +88,9 @@ export class Tab1Page {
     localStorage.clear();
   }
 
-  async presentAlert() {
+  async presentAlert(message: string) {
     const alert = await this.alertController.create({
-      header: 'JSONResult',
+      header: message,
       message: this.jsonResponse.substring(0, 200),
       buttons: ['OK']
     });

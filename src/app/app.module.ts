@@ -11,12 +11,14 @@ import { AppComponent } from './app.component';
 import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 import { FetchService } from './services/fetch.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ForegroundService } from '@ionic-native/foreground-service/ngx';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
   providers: [
+    ForegroundService,
     BackgroundMode,
     FetchService,
     StatusBar,
