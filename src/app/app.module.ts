@@ -8,7 +8,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BackgroundMode } from '@ionic-native/background-mode/ngx';
+//import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 import { FetchService } from './services/fetch.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ForegroundService } from '@ionic-native/foreground-service/ngx';
@@ -19,7 +19,7 @@ import { ForegroundService } from '@ionic-native/foreground-service/ngx';
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
   providers: [
     ForegroundService,
-    BackgroundMode,
+    //BackgroundMode,
     FetchService,
     StatusBar,
     SplashScreen,

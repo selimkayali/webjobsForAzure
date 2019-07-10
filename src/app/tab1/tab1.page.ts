@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { FetchService } from '../services/fetch.service';
-import { BackgroundMode } from '@ionic-native/background-mode/ngx';
+//import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 import { ForegroundService } from '@ionic-native/foreground-service/ngx';
 
 @Component({
@@ -10,30 +10,18 @@ import { ForegroundService } from '@ionic-native/foreground-service/ngx';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
-  number: number = 0;
+  number = 0;
   interval;
-  uri: string = '';
-  jsonResponse: string = '';
+  uri = '';
+  jsonResponse = '';
   constructor(
     private alertController: AlertController,
     private fetchService: FetchService,
-    private backgroundMode: BackgroundMode,
+    //private backgroundMode: BackgroundMode,
     private foregroundService: ForegroundService
   ) {}
 
   async startFetch() {
-    this.backgroundMode.disableWebViewOptimizations();
-    this.backgroundMode.enable();
-    // this.backgroundMode.setDefaults({
-    //   silent: true,
-    //   hidden: false,
-    //   bigText: true,
-    //   resume: true,
-    //   ticker: 'its working :)',
-    //   text: 'Azure webjobs',
-    //   title: 'webjobs'
-    // });
-
     // this.badge.requestPermission().then(res => {
     //   if (res) {
 
@@ -57,7 +45,7 @@ export class Tab1Page {
       this.interval = setInterval(async () => {
         this.jsonResponse = '';
         this.jsonResponse = await this.name(this.uri).then(data => data.text());
-        let date = new Date();
+        const date = new Date();
         this.jsonResponse +=
           ' ' +
           date.getDay() +
